@@ -1,0 +1,83 @@
+
+body{
+    padding: 0px;
+    margin: 0px;
+   
+    background-image: url(../img/kart/sukno.jpeg);
+}
+.all{
+    padding: 0px;
+    margin: 0px;
+    background:  #8358f8;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/another/Sukno_dlja_pokernogo_stola_kriptonit.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 120%;
+}
+.my_col{
+    width: 150px;
+    height: 225px;
+    background-position: center;
+    background-size: 100%;
+    z-index: 1001;
+    display: inline-block; 
+    background-image: url(../img/kart/green_back.png);
+    margin-left: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+#top {
+    position: absolute;
+    top: 5%;
+    height: 225px;
+    width: 100%;
+    left: 15%;
+}
+#center {
+    font-family: 'Pattaya', sans-serif;
+    position: absolute;
+    top: 43%;
+    text-align: center;
+    color: azure;
+    font-size: 60px;
+    width: 100%;
+}
+.opacity{
+    animation-name: opacity;
+    animation-direction: normal;
+    animation-duration: 1.6s;
+    animation-timing-function: ease;
+    transition: 1.5s;
+}
+#bottom {
+    left: 22%;
+    position: absolute;
+    top: 62%;
+    height: 225px;
+}
+.rotate {
+    animation-name: rotate;
+    animation-direction: normal;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    transition: 0.5s;
+}
+@keyframes rotate{
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(90deg);
+    }
+}
+@keyframes opacity{
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
