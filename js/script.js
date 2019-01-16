@@ -160,15 +160,15 @@ var j = 0;
 //  }
 //  j++;
 //}
-mas1 [0] = 1;
-mas1 [1] = 5;
-mas1 [2] = 9;
-mas1 [3] =13;
-mas1 [4] = 17;
-mas1 [5] = 21;
-mas1 [6] = 25;
-mas1 [7] = 3;
-mas1 [8] = 2;
+mas1 [0] = 2;
+mas1 [1] = 7;
+mas1 [2] = 11;
+mas1 [3] =15;
+mas1 [4] = 19;
+mas1 [5] = 22;
+mas1 [6] = 3;
+mas1 [7] = 6;
+mas1 [8] = 5;
 return mas1;
 }
 
@@ -321,31 +321,37 @@ function straight(ArrayObjects){
     var ArrayClear =  identic(ArraySort,0);
     
     console.log("checkStraight(ArrayClear)");
-    console.log(checkStraight(ArrayClear));
+    console.log(checkStraight(ArrayClear,1));
     
-    if(checkStraight(ArrayClear) == true){
+    if(checkStraight(ArrayClear,1) == true){
+            var newClear = checkStraight(ArrayClear,2);
+            console.log("ArrayClear = checkStraight(ArrayClear,2);");
+            console.log(newClear);
             boolArray[3] = true;
             console.log("strit");
-            if(ArrayClear.length == 5){
-                ArrStraightComb.push(ArrayClear);
+            if(newClear.length == 5){
+                ArrStraightComb.push(newClear);
                 console.log('identicNumber.length');
                 console.log(identicNumber.length);
                 if(identicNumber.length != 0){
-                    checkStraightAllComb(ArrayClear,identicNumber);
+                    checkStraightAllComb(newClear,identicNumber);
                 }
                 console.log(ArrStraightComb);
-            } else if(ArrayClear.length == 6){
-                var newArr1 = copyArray(ArrayClear);
-                var newArr2 = copyArray(ArrayClear);
+            } else if(newClear.length == 6){
+                var newArr1 = copyArray(newClear);
+                var newArr2 = copyArray(newClear);
                 newArr1.splice(0,1);
                 newArr2.splice(newArr2.length-1,1);
                 ArrStraightComb.push(newArr1);
                 ArrStraightComb.push(newArr2);
+                if(identicNumber.length != 0){
+                    checkStraightAllComb(newClear,identicNumber);
+                }
                 console.log(ArrStraightComb);
-            }  else if(ArrayClear.length == 7){
-                var newArr1 = copyArray(ArrayClear);
-                var newArr2 = copyArray(ArrayClear);
-                var newArr3 = copyArray(ArrayClear);
+            }  else if(newClear.length == 7){
+                var newArr1 = copyArray(newClear);
+                var newArr2 = copyArray(newClear);
+                var newArr3 = copyArray(newClear);
                 newArr1.splice(0,2);
                 newArr2.splice(newArr2.length-2,2);
                 newArr3.splice(0,1);
@@ -399,6 +405,7 @@ function identic(Array,identik_OR_Array){
         }
     console.log("identicNum");
     console.log(identicNum);
+    
     if(identik_OR_Array  == 1) { return identicNum } else { return Array };
 }
 
@@ -413,19 +420,30 @@ function checkStraightAllComb(clearArr,idenNum){
         }
     }
 }
-function checkStraight(Array){
+function checkStraight(Array,value_OR_array){
     var count = 0;
     console.log("checkStraight");
     console.log(Array[0]);
+    var newArray = [];
     for(var i = 0, j = 0; i < Array.length-1; i++){
         j = i+1;
-        if( (Array[i][0] - Array[j][0]) == 1 ) count++; 
+        if( (Array[i][0] - Array[j][0]) == 1 ) {count++; 
         console.log("count     Array[i][0]      Array[j][0]");
         console.log(count + " " + Array[i][0] + " " + Array[i+1][0]);
+               newArray.push(Array[i]);
+                if(i == Array.length-2) { console.log("i == Array.length-1"); newArray.push(Array[j])};
+            } else {
+                count = 0;
+                newArray.splice(0,newArray.length-1);
+            }
     }
-    console.log("count");
-    console.log(count);
-    if(count == 4) { return true} else { return false}
+    console.log("Array chekStraight");
+    console.log(Array);
+    if(value_OR_array == 1){
+        if(count >= 4) { return true} else { return false}
+    } else{
+        return newArray;
+    }
 }
 function copyArray(arr){
     var newArr = [];
