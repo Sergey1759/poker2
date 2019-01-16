@@ -161,12 +161,12 @@ var j = 0;
 //  j++;
 //}
 mas1 [0] = 1;
-mas1 [1] = 22;
+mas1 [1] = 5;
 mas1 [2] = 9;
-mas1 [3] =43;
-mas1 [4] = 6;
-mas1 [5] = 52;
-mas1 [6] = 4;
+mas1 [3] =13;
+mas1 [4] = 17;
+mas1 [5] = 21;
+mas1 [6] = 25;
 mas1 [7] = 3;
 mas1 [8] = 2;
 return mas1;
@@ -308,18 +308,56 @@ var countCombinations = 0;
 //
 //}
 //stright (randomArray);
+var ArrStraightComb = [];
+
 function straight(ArrayObjects){
     var Arrayhelp = [];
     for(var i = 0; i < ArrayObjects.length; i++){
         Arrayhelp[i] = [parseInt(ArrayObjects[i].title),parseInt(ArrayObjects[i].id)];
     }
-    console.log("Arrayhelp");
-    var ArraySort = MySort(Arrayhelp);
-    console.log(MySort(Arrayhelp));
+
+    var ArraySort = MySort(Arrayhelp); // perevirity !!!!!
+    var identicNumber =  identic(ArraySort,1);
+    var ArrayClear =  identic(ArraySort,0);
     
-    console.log("Arrayhelp");
-    console.log(Arrayhelp);
+    console.log("checkStraight(ArrayClear)");
+    console.log(checkStraight(ArrayClear));
+    
+    if(checkStraight(ArrayClear) == true){
+            boolArray[3] = true;
+            console.log("strit");
+            if(ArrayClear.length == 5){
+                ArrStraightComb.push(ArrayClear);
+                console.log('identicNumber.length');
+                console.log(identicNumber.length);
+                if(identicNumber.length != 0){
+                    checkStraightAllComb(ArrayClear,identicNumber);
+                }
+                console.log(ArrStraightComb);
+            } else if(ArrayClear.length == 6){
+                var newArr1 = copyArray(ArrayClear);
+                var newArr2 = copyArray(ArrayClear);
+                newArr1.splice(0,1);
+                newArr2.splice(newArr2.length-1,1);
+                ArrStraightComb.push(newArr1);
+                ArrStraightComb.push(newArr2);
+                console.log(ArrStraightComb);
+            }  else if(ArrayClear.length == 7){
+                var newArr1 = copyArray(ArrayClear);
+                var newArr2 = copyArray(ArrayClear);
+                var newArr3 = copyArray(ArrayClear);
+                newArr1.splice(0,2);
+                newArr2.splice(newArr2.length-2,2);
+                newArr3.splice(0,1);
+                newArr3.splice(newArr3.length-1,1);
+                ArrStraightComb.push(newArr1);
+                ArrStraightComb.push(newArr2);
+                ArrStraightComb.push(newArr3);
+                console.log(ArrStraightComb);
+            } 
+    }
    
+
 }
 function MySort(Array){
     var NewArray = [];
@@ -344,8 +382,63 @@ function MySort(Array){
     return NewArray;
 }
 
+function identic(Array,identik_OR_Array){
+     var identicNum = [];
+     var count = 0, countfor = Array.length;
+        
+        for(var i = 0; i < countfor; i++){
+            for(var j = 0; j < countfor; j++){
+                if(i != j) {
+                    if(Array[i][0] == Array[j][0]){
+                        identicNum[count++] = Array[j];
+                        Array.splice(j,1);
+                        countfor--;
+                    }
+                }
+            }
+        }
+    console.log("identicNum");
+    console.log(identicNum);
+    if(identik_OR_Array  == 1) { return identicNum } else { return Array };
+}
+
+function checkStraightAllComb(clearArr,idenNum){
+    for(var i = 0; i < idenNum.length; i++){
+        for(var j = 0; j < clearArr.length; j++){
+            if(idenNum[i][0] == clearArr[j][0]){
+                var newArr = copyArray(clearArr);
+                newArr.splice(j,1,idenNum[i]);
+                ArrStraightComb.push(newArr);
+            }
+        }
+    }
+}
+function checkStraight(Array){
+    var count = 0;
+    console.log("checkStraight");
+    console.log(Array[0]);
+    for(var i = 0, j = 0; i < Array.length-1; i++){
+        j = i+1;
+        if( (Array[i][0] - Array[j][0]) == 1 ) count++; 
+        console.log("count     Array[i][0]      Array[j][0]");
+        console.log(count + " " + Array[i][0] + " " + Array[i+1][0]);
+    }
+    console.log("count");
+    console.log(count);
+    if(count == 4) { return true} else { return false}
+}
+function copyArray(arr){
+    var newArr = [];
+    for(var i = 0; i < arr.length; i++){
+        newArr[i] = arr[i];
+    }
+    return newArr;
+}
+
 var ArrayforFlesh = [];
 var countforFlesh = [];
+
+
 
 function flesh(obj){    
     var flesh_Array = [];
